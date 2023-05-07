@@ -1,0 +1,28 @@
+﻿@page "/Products"
+@using BlazorWebAssembly.Entities.Product
+<h3>ProductsPage</h3>
+@inject ICatalogProduct _products
+@inject IShopCart _ShopCart
+
+@foreach (var product in _products.GetProducts())
+{
+    <div>
+        <ProductItem Product="product" ></ProductItem>
+         <a href="/ProductInfo/@product.Id">Description</a><br/> 
+        <button @onclick="@(()=> Add(product))">Add</button>
+    </div>
+    
+}
+
+
+@code {
+
+    private Product _product;
+    private void Add(Product product)
+    {
+        _ShopCart.AddProductInCart(product);
+    }
+
+  
+
+}

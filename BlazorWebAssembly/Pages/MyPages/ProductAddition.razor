@@ -1,0 +1,52 @@
+﻿@page "/ProductAddition"
+@using BlazorWebAssembly.Entities.Product
+@using BlazorWebAssembly.ModelForm
+@using Microsoft.AspNetCore.Components
+@using BlazorWebAssembly.Entities.Category
+<h3>Product Add</h3>
+@inject ICatalogProduct _Product
+@inject ICategoriesRepository _Categories
+
+
+
+<EditForm Model="_Model" OnValidSubmit="ProcessValidForm">
+
+    <DataAnnotationsValidator />
+
+    Name: <InputText  @bind-Value="_Model.Name" /><br/>
+    Price: <InputNumber type="number" @bind-Value="_Model.Price" /><br/>
+    Count: <InputNumber type="number" @bind-Value="_Model.Count"/><br/>
+    Picture: <InputText @bind-Value="_Model.Picture"/><br/>
+    Description: <InputText @bind-Value="_Model.Description"/><br/>
+    Category: <select>
+    @foreach (var various in _Categories.GetCategories())
+    {
+        <option>@various.CategoryName</option>
+    }
+</select>
+  @* Красивее оборачивать в table *@
+
+  <br/> <input type="submit" value="Add">
+  <ValidationSummary />
+</EditForm>
+
+
+
+
+
+
+@code {
+     private ProductModel _Model = new();
+
+    private void ProcessValidForm()
+    {
+        var newPicture = _Model.Picture;
+        var newCategory = _Model.Category;
+        var newName = _Model.Name;
+        var newPrice = _Model.Price;
+        var newDesc = _Model.Description;
+        var newCount = _Model.Count;
+        
+        _Product.AddProduct(new Product(newPicture,newCategory,newName,newPrice,newDesc,newCount));
+    }
+}

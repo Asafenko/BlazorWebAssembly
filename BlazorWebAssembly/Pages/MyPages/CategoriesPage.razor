@@ -1,0 +1,16 @@
+﻿@page "/Categories"
+@using BlazorWebAssembly.Entities.Category
+<h3>CategoriesPage</h3>
+@inject ICategoriesRepository _Categories
+
+@foreach (var nameCategory in _Categories.GetCategories())
+{
+    <ul>
+        <li>@nameCategory.CategoryName</li>
+    </ul>
+}
+
+
+@code {
+    
+}

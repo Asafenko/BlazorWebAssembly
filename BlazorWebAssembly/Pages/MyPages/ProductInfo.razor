@@ -1,0 +1,23 @@
+﻿@page "/ProductInfo/{ProductId:long}"
+@using BlazorWebAssembly.Entities.Product
+<h3>ProductInfo</h3>
+@inject ICatalogProduct _catalog
+
+@{
+    <ul>
+        <a>Description: @_product.Description</a>
+    </ul>
+}
+
+@code {
+    [Parameter]
+    public long ProductId { get; set; }
+ 
+    private Product _product { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+        _product = _catalog.GetProductById(ProductId);
+    }
+}

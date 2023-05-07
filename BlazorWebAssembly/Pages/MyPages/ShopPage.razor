@@ -1,0 +1,15 @@
+﻿@page "/Shop"
+
+@using BlazorWebAssembly.Entities.Product
+<h3>ShopPage</h3>
+@inject IShopCart _ShopCart
+
+
+@foreach (var product in _ShopCart.GetShopProduct())
+{
+    <ProductItem Product="product"/>
+    <a href="/ProductInfo/@product.Id">Description</a><br/>
+}
+
+@code {
+}

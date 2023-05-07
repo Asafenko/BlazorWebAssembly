@@ -1,0 +1,33 @@
+﻿@page "/CategoryAddition"
+@using BlazorWebAssembly.ModelForm
+@using BlazorWebAssembly.Entities.Category
+<h3>Category Add</h3>
+@inject ICategoriesRepository _Categories
+
+
+
+
+<EditForm Model="_model" OnValidSubmit="ProcessValidForm">
+  <DataAnnotationsValidator />
+ 
+  Category-Name : <InputText @bind-Value="_model.CategoryName" />
+  
+ 
+   <input type="submit" value="Add">
+  
+  <ValidationSummary />
+</EditForm>
+
+
+
+
+
+@code {
+    private CategoryModel _model = new CategoryModel();
+
+    private void ProcessValidForm()
+    {
+        var newCategoryName = _model.CategoryName;
+        _Categories.AddCategory(new Category(newCategoryName));
+    }
+}

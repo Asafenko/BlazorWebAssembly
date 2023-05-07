@@ -1,0 +1,18 @@
+﻿@using BlazorWebAssembly.Entities.Product
+
+
+
+        <img src="@Product.Picture"/>
+        <ul>
+            <li>Category: @Product.Category</li>
+            <li>Name: @Product.Name</li>
+            <li>Price: @Product.Price</li>
+            <li>Count: @Product.Count</li>
+        </ul>
+     
+
+
+@code {
+    [Parameter]
+    public Product Product { get; set; }
+}
